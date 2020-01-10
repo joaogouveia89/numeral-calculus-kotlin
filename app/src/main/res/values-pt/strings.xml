@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Calculo Numerico</string>
+    <string name="menu_base_conversion">Conversão de Bases</string>
+    <string name="hint_base_conversion_input">Entre com o número</string>
+    <string name="label_convert">Converter</string>
+    <string name="error_invalid_number_base">Entrada inválida para a base selecionada!</string>
+    <string name="nav_base_conversion">Conversão de Bases</string>
+    <string name="number_conversion_result">Base %1$d: %2$s</string>
+</resources>
