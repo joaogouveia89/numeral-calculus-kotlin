@@ -8,31 +8,31 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="io.github.joaogouveia89.numeralcalculus.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
         android:name="io.github.joaogouveia89.numeralcalculus.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:label="Gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="io.github.joaogouveia89.numeralcalculus.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:label="Slide Show"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_tools"
         android:name="io.github.joaogouveia89.numeralcalculus.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
+        android:label="Tools"
         tools:layout="@layout/fragment_tools" />
 
     <fragment
         android:id="@+id/nav_share"
         android:name="io.github.joaogouveia89.numeralcalculus.ui.share.ShareFragment"
-        android:label="@string/menu_share"
+        android:label="Share"
         tools:layout="@layout/fragment_share" />
 
     <fragment

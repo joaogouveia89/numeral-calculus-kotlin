@@ -7,4 +7,9 @@
     <string name="error_invalid_number_base">Entrada inválida para a base selecionada!</string>
     <string name="nav_base_conversion">Conversão de Bases</string>
     <string name="number_conversion_result">Base %1$d: %2$s</string>
+    <string name="cache_results_header">Salvar</string>
+    <string name="label_cache_results">Guardar Resultados</string>
+    <string name="clean_cache_results">Limpar Resultados Calculados</string>
+    <string name="label_desired_basis">Base da entrada</string>
+    <string name="basis_conversion_input_hint">Entre com o numero a ser convertido</string>
 </resources>

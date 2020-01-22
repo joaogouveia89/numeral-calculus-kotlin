@@ -1,8 +1,7 @@
 package io.github.joaogouveia89.numeralcalculus
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -13,8 +12,7 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
-import android.widget.ArrayAdapter
-import kotlinx.android.synthetic.main.fragment_base_conversion.*
+import android.view.MenuItem
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,6 +43,14 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.action_settings){
+            val settinsActivity = Intent(this, SettingsActivity::class.java)
+            startActivity(settinsActivity)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -1,21 +1,26 @@
 <resources>
     <string name="app_name">Numeral Calculus</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
     <string name="menu_base_conversion">Base Conversion</string>
     <string name="nav_base_conversion">Base Conversion</string>
     <string name="hint_base_conversion_input">Enter your number here</string>
     <string name="label_convert">Convert</string>
     <string name="error_invalid_number_base">Invalid input for selected base!</string>
     <string name="number_conversion_result">Base %1$d: %2$s</string>
+
+    <!-- Preference Titles -->
+
+    <!-- Preference cache results -->
+
+    <string name="cache_results_header">Cache</string>
+    <string name="label_cache_results">Cache Results</string>
+    <string name="clean_cache_results">Clean Cache Results</string>
+    <string name="label_desired_basis">Input basis</string>
+    <string name="basis_conversion_input_hint">Enter the number to be convert</string>
+    <string name="title_activity_settings" translatable="false">Settings</string>
+    <string name="basis_seek_label" translatable="false">Base %1$d</string>
+
+    <!-- Messages Preferences -->
+
+    <!-- Sync Preferences -->
 </resources>
