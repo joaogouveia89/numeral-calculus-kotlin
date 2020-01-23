@@ -23,6 +23,8 @@ class BaseConversionViewModel : BaseFragmentViewModel(), OnConversionFinished {
 
     private val cachedBasis = mutableListOf<Int>()
 
+    var selectedBasis = 2
+
     val conversions = SparseArray<String>()
 
     private val executor = Executors.newFixedThreadPool(NUMBER_OF_THREADS)
@@ -44,12 +46,9 @@ class BaseConversionViewModel : BaseFragmentViewModel(), OnConversionFinished {
 //        convertRange(positionRange)
     }
 
-    private fun convertRange(range : IntRange){
-        for(i in range){
-            if(!conversions.containsKey(i)){
-
-                executor.execute(NumericBasisFromDecimal(conversions[10], i, this))
-            }
+    fun initData(input: String){
+        if(!conversions.containsKey(selectedBasis)){
+            conversions[selectedBasis] = input
         }
     }
 
