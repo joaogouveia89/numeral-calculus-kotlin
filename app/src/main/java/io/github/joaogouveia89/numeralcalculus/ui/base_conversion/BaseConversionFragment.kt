@@ -20,7 +20,7 @@ class BaseConversionFragment : BaseFragment() {
     private lateinit var baseConversionViewModel: BaseConversionViewModel
     private val onBasisChangeListener = OnBasisSeekBackChangeListener()
     private val inputTextWatcher = InputTextWatcher{
-        baseConversionViewModel.initData(input.text.toString())
+        baseConversionViewModel.initUserInput(input.text.toString(), base.progress)
     }
 
     override fun onCreateView(
@@ -47,18 +47,22 @@ class BaseConversionFragment : BaseFragment() {
         onBasisChangeListener.basis.observe(viewLifecycleOwner, Observer {
             baseDiscrete.text = resources.getString(R.string.basis_seek_label, it)
             if(input.text.toString().isEmpty()){
-                baseConversionViewModel.selectedBasis = it
-                result.text = input.text
+                baseConversionViewModel.userInputBasis = it
             }else{
-                //calculate the conversions
+                baseConversionViewModel.userInput = input.text.toString()
+                //call conversion
             }
 
         })
 
 
         baseConversionViewModel.errorMessageResource.observe(this, Observer {
-            val snackbar = Snackbar.make(view, getString(it), Snackbar.LENGTH_LONG)
-            snackbar.show()
+            if(it == R.string.error_invalid_number_base){
+                input.error = getString(it)
+            }else{
+                val snackbar = Snackbar.make(view, getString(it), Snackbar.LENGTH_LONG)
+                snackbar.show()
+            }
         })
     }
 
@@ -68,7 +72,7 @@ class BaseConversionFragment : BaseFragment() {
     }
 
     private fun initData() {
-        baseConversionViewModel.selectedBasis = base.progress
+        baseConversionViewModel.userInputBasis = base.progress
         baseDiscrete.text = resources.getString(R.string.basis_seek_label, 2)
         result.text = input.text
     }

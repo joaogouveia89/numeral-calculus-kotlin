@@ -1,29 +1,39 @@
 package io.github.joaogouveia89.numeralcalculus.calculus.numeric_basis
 
-import io.github.joaogouveia89.numeralcalculus.calculus.OnConversionFinished
+import android.os.Process
 
-
-class NumericBasisToDecimal(
+class NumericBasisFromDecimal(
     private val input : String,
-    private val basis : Int,
-    private val listener : OnConversionFinished)
+    val outputBasis : Int)
     : Runnable {
 
-    private var _result = ""
+    val result : String
+        get() = _result
+
+    private var _result : String = ""
 
     override fun run() {
-        _result = toDecimal()
-        listener.conversionResult(_result, 10)
+        fromDecimal()
     }
 
-    private fun toDecimal(): String {
-        var decimal = 0
-        for (i in input.length - 1 downTo 0) {
-            decimal += (Math.pow(
-                basis.toDouble(),
-                i.toDouble()
-            ) * Character.getNumericValue(input[input.length - i - 1])).toInt()
+    private fun fromDecimal() {
+        Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND)
+        var num = Integer.parseInt(this.input)
+        while (num != 0) {
+            this._result = getNumberChar(num % this.outputBasis) + this._result
+            num /= this.outputBasis
         }
-        return decimal.toString()
+    }
+
+    private fun getNumberChar(n: Int): Char {
+        var n = n
+        val c: Char
+        if (n >= 0 && n < 10) {
+            c = (n + 48).toChar()
+        } else {
+            n -= 10
+            c = (n + 65).toChar()
+        }
+        return c
     }
 }
