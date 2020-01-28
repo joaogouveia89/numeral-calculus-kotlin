@@ -1,13 +1,17 @@
 package io.github.joaogouveia89.numeralcalculus.ui.base_conversion
 
+import android.util.Log
 import android.util.SparseArray
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.github.joaogouveia89.numeralcalculus.R
 import io.github.joaogouveia89.numeralcalculus.base.BaseFragmentViewModel
+import io.github.joaogouveia89.numeralcalculus.calculus.numeric_basis.NumericBasisFromDecimal
+import io.github.joaogouveia89.numeralcalculus.calculus.numeric_basis.NumericBasisToDecimal
 import java.util.concurrent.LinkedBlockingDeque
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
+import kotlin.math.E
 
 class BaseConversionViewModel : BaseFragmentViewModel() {
     /*
@@ -23,8 +27,13 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
 
     private val conversionsQueue = LinkedBlockingDeque<Runnable>()
 
+    private lateinit var base10Thread : Thread
+
     var userInput : String = ""
     var userInputBasis : Int = 0
+        set(value) {
+            field = getBasisBySeekBarProgress(value)
+        }
 
     init {
         pool = ThreadPoolExecutor(
@@ -38,7 +47,7 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
 
     private val cachedBasis = mutableListOf<Int>()
 
-    val conversions = SparseArray<Runnable>()
+    val conversions = SparseArray<Thread>()
 
     private val _errorMessageResource = MutableLiveData<Int>()
 
@@ -47,7 +56,13 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
 
     fun convert(progress: Int){
         val currentBasis = getBasisBySeekBarProgress(progress)
-        val positionRange = (currentBasis - CONVERSION_RANGE)..(currentBasis + CONVERSION_RANGE)
+        val positionRange = if(currentBasis - CONVERSION_RANGE < 2){
+             2..(currentBasis + CONVERSION_RANGE)
+        }else if(currentBasis + CONVERSION_RANGE > 36){
+            (currentBasis - CONVERSION_RANGE)..36
+        }else{
+            (currentBasis - CONVERSION_RANGE)..(currentBasis + CONVERSION_RANGE)
+        }
     }
 
     private fun getBasisBySeekBarProgress(progress: Int) = progress + 2
@@ -70,14 +85,23 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
         return res
     }
 
+    fun getConversion(seekBarPosition :Int) : String{
+        val base = getBasisBySeekBarProgress(seekBarPosition)
+        if(base == userInputBasis){
+            return userInput
+        }else{
+            return ""
+        }
+    }
+
     fun initUserInput(input: String, progress: Int) {
         if(validateInput(input, progress)){
             userInput = input
-            userInputBasis = getBasisBySeekBarProgress(progress)
-            convert(progress)
+            userInputBasis = progress
+            base10Thread = Thread(NumericBasisToDecimal(userInput, userInputBasis))
+            base10Thread.start()
         }else{
             _errorMessageResource.postValue(R.string.error_invalid_number_base)
         }
-
     }
 }

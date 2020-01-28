@@ -21,6 +21,9 @@ class BaseConversionFragment : BaseFragment() {
     private val onBasisChangeListener = OnBasisSeekBackChangeListener()
     private val inputTextWatcher = InputTextWatcher{
         baseConversionViewModel.initUserInput(input.text.toString(), base.progress)
+        activity?.runOnUiThread {
+            result.text = baseConversionViewModel.getConversion(base.progress)
+        }
     }
 
     override fun onCreateView(
@@ -50,9 +53,8 @@ class BaseConversionFragment : BaseFragment() {
                 baseConversionViewModel.userInputBasis = it
             }else{
                 baseConversionViewModel.userInput = input.text.toString()
-                //call conversion
+                result.text = baseConversionViewModel.getConversion(it)
             }
-
         })
 
 
