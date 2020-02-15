@@ -54,6 +54,7 @@ class BaseConversionFragment : BaseFragment() {
                 baseConversionViewModel.userInput = input.text.toString()
                 result.text = baseConversionViewModel.getConversion(seekBarBase)
             }
+            baseConversionViewModel.convertCacheBasis(seekBarBase)
         })
 
 
