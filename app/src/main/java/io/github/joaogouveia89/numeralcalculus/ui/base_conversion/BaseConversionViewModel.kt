@@ -2,16 +2,17 @@ package io.github.joaogouveia89.numeralcalculus.ui.base_conversion
 
 import android.util.Log
 import android.util.SparseArray
+import androidx.core.util.set
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import io.github.joaogouveia89.numeralcalculus.R
 import io.github.joaogouveia89.numeralcalculus.base.BaseFragmentViewModel
-import io.github.joaogouveia89.numeralcalculus.calculus.numeric_basis.NumericBasisFromDecimal
 import io.github.joaogouveia89.numeralcalculus.calculus.numeric_basis.NumericBasisToDecimal
+import io.github.joaogouveia89.numeralcalculus.calculus.numeric_basis.NumericBasisToDecimalSingleton
 import java.util.concurrent.LinkedBlockingDeque
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
-import kotlin.math.E
 
 class BaseConversionViewModel : BaseFragmentViewModel() {
     /*
@@ -27,7 +28,13 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
 
     private val conversionsQueue = LinkedBlockingDeque<Runnable>()
 
-    private lateinit var base10Thread : Thread
+    private lateinit var base10Process : NumericBasisToDecimal
+
+    private val base10Observer = object : NumericBasisToDecimal.Base10ConversionListener{
+        override fun isDone(result: String) {
+            conversions[10] = result
+        }
+    }
 
     var userInput : String = ""
     var userInputBasis : Int = 0
@@ -45,9 +52,7 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
         )
     }
 
-    private val cachedBasis = mutableListOf<Int>()
-
-    val conversions = SparseArray<Thread>()
+    val conversions = SparseArray<String>()
 
     private val _errorMessageResource = MutableLiveData<Int>()
 
@@ -65,7 +70,7 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
         }
     }
 
-    private fun getBasisBySeekBarProgress(progress: Int) = progress + 2
+    fun getBasisBySeekBarProgress(progress: Int) = progress + 2
 
     fun validateInput(input: String, seekBarPosition: Int) : Boolean{
         val regex = generateInputRegex(seekBarPosition).toRegex()
@@ -85,12 +90,11 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
         return res
     }
 
-    fun getConversion(seekBarPosition :Int) : String{
-        val base = getBasisBySeekBarProgress(seekBarPosition)
-        if(base == userInputBasis){
-            return userInput
+    fun getConversion(base :Int) : String{
+        return if(base == userInputBasis){
+            userInput
         }else{
-            return ""
+            conversions[base] ?: ""
         }
     }
 
@@ -98,8 +102,9 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
         if(validateInput(input, progress)){
             userInput = input
             userInputBasis = progress
-            base10Thread = Thread(NumericBasisToDecimal(userInput, userInputBasis))
-            base10Thread.start()
+            conversions.clear()
+            base10Process = NumericBasisToDecimal(userInput, userInputBasis, base10Observer)
+            Thread(base10Process).start()
         }else{
             _errorMessageResource.postValue(R.string.error_invalid_number_base)
         }

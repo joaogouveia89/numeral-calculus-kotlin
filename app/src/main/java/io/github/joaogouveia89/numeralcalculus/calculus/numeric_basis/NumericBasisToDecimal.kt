@@ -1,28 +1,23 @@
 package io.github.joaogouveia89.numeralcalculus.calculus.numeric_basis
 
-import android.os.Process
+import kotlin.math.pow
 
-class NumericBasisToDecimal(
-    private val input : String,
-    private val outputBasis : Int
-) : Runnable{
+class NumericBasisToDecimal(private val input : String, private  val inputBasis : Int, val listener : Base10ConversionListener) : Runnable {
 
-    private var _result = ""
+    val result : String
+        get() = _result
+    private var _result : String = ""
 
     override fun run() {
-        // Moves the current Thread into the background
-        Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND)
-        toDecimal()
-    }
-
-    private fun toDecimal() {
         var decimal = 0
         for (i in input.length - 1 downTo 0) {
-            decimal += (Math.pow(
-                outputBasis.toDouble(),
-                i.toDouble()
-            ) * Character.getNumericValue(input[input.length - i - 1])).toInt()
+            decimal += (inputBasis.toDouble().pow(i.toDouble()) * Character.getNumericValue(input[input.length - i - 1])).toInt()
         }
         _result = decimal.toString()
+        listener.isDone(result)
+    }
+
+    interface Base10ConversionListener{
+        fun isDone(result : String)
     }
 }

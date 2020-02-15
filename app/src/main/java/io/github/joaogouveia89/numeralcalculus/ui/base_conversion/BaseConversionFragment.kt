@@ -5,14 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import io.github.joaogouveia89.numeralcalculus.R
 import io.github.joaogouveia89.numeralcalculus.base.BaseFragment
-import io.github.joaogouveia89.numeralcalculus.calculus.numeric_basis.NumericBasisFromDecimal
-import io.github.joaogouveia89.numeralcalculus.calculus.numeric_basis.NumericBasisToDecimal
 import kotlinx.android.synthetic.main.fragment_base_conversion.*
 
 class BaseConversionFragment : BaseFragment() {
@@ -22,7 +19,7 @@ class BaseConversionFragment : BaseFragment() {
     private val inputTextWatcher = InputTextWatcher{
         baseConversionViewModel.initUserInput(input.text.toString(), base.progress)
         activity?.runOnUiThread {
-            result.text = baseConversionViewModel.getConversion(base.progress)
+            result.text = baseConversionViewModel.getConversion(baseConversionViewModel.getBasisBySeekBarProgress(base.progress))
         }
     }
 
@@ -48,12 +45,14 @@ class BaseConversionFragment : BaseFragment() {
 
     private fun initObservers(view: View) {
         onBasisChangeListener.basis.observe(viewLifecycleOwner, Observer {
-            baseDiscrete.text = resources.getString(R.string.basis_seek_label, it)
+            hideKeyboard()
+            val seekBarBase = baseConversionViewModel.getBasisBySeekBarProgress(it)
+            baseDiscrete.text = resources.getString(R.string.basis_seek_label, seekBarBase)
             if(input.text.toString().isEmpty()){
-                baseConversionViewModel.userInputBasis = it
+                baseConversionViewModel.userInputBasis = seekBarBase
             }else{
                 baseConversionViewModel.userInput = input.text.toString()
-                result.text = baseConversionViewModel.getConversion(it)
+                result.text = baseConversionViewModel.getConversion(seekBarBase)
             }
         })
 

@@ -11,7 +11,7 @@ class OnBasisSeekBackChangeListener : SeekBar.OnSeekBarChangeListener {
     private val _basis = MutableLiveData<Int>()
 
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-        _basis.postValue(progress + 2)
+        _basis.postValue(progress)
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar?) {}
