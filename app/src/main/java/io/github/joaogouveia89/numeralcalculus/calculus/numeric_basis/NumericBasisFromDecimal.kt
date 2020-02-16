@@ -4,9 +4,9 @@ import android.os.Process
 import android.util.Log
 import java.util.concurrent.Callable
 
-class NumericBasisFromDecimal(val decimal : String, val outputBasis : Int) : Callable<String> {
+class NumericBasisFromDecimal(private val decimal : String, private val outputBasis : Int) : Callable<String> {
     override fun call(): String {
-        Log.i("NumericBasisFromDecimal", "starting conversion for $decimal to base $outputBasis")
+        Log.d("NumericBasisFromDecimal", "starting conversion for $decimal to base $outputBasis")
         Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND)
         var result = ""
         var num = Integer.parseInt(decimal)
@@ -15,17 +15,19 @@ class NumericBasisFromDecimal(val decimal : String, val outputBasis : Int) : Cal
                 getNumberChar(num % outputBasis) + result
             num /= outputBasis
         }
+        Log.d("NumericBasisFromDecimal", "result conversion for $decimal to base $outputBasis = $result")
         return result
     }
 
-    protected fun getNumberChar(n: Int): Char {
+    private fun getNumberChar(n: Int): Char {
         var number = n
         val c: Char
         if (n in 0..9) {
             c = (n + 48).toChar()
         } else {
+            Log.i("NumericBasisFromDecimal", "$n + 65")
             number -= 10
-            c = (n + 65).toChar()
+            c = (number + 65).toChar()
         }
         return c
     }

@@ -12,4 +12,5 @@
     <string name="clean_cache_results">Limpar Resultados Calculados</string>
     <string name="label_desired_basis">Base da entrada</string>
     <string name="basis_conversion_input_hint">Entre com o numero a ser convertido</string>
+    <string name="error_out_bound">Esse numero é muito grande para converter nesse aplicativo</string>
 </resources>

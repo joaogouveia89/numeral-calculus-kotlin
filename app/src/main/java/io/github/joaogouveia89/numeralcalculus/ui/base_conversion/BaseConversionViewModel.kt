@@ -40,6 +40,10 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
             base10Result = result
             convertCacheBasis()
         }
+
+        override fun outBound() {
+            _errorMessageResource.postValue(R.string.error_out_bound)
+        }
     }
 
     var userInput : String = ""

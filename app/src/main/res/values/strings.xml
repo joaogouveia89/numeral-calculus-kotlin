@@ -19,6 +19,7 @@
     <string name="basis_conversion_input_hint">Enter the number to be convert</string>
     <string name="title_activity_settings" translatable="false">Settings</string>
     <string name="basis_seek_label" translatable="false">Base %1$d</string>
+    <string name="error_out_bound">This number is out of app conversion boundaries</string>
 
     <!-- Messages Preferences -->
 
