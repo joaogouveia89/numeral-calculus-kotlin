@@ -90,24 +90,6 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
 
     fun getBasisBySeekBarProgress(progress: Int) = progress + 2
 
-    private fun validateInput(input: String, seekBarPosition: Int) : Boolean{
-        val regex = generateInputRegex(seekBarPosition).toRegex()
-        return regex.matches(input)
-    }
-
-    private fun generateInputRegex(progress: Int): String {
-        val basis = getBasisBySeekBarProgress(progress)
-        var res = if(basis <= 10) "^[0-${basis-1}" else  "^[0-9"
-        if(basis == 11){
-            res = "${res}A"
-        }else if(basis > 11){
-            val ref = basis - 10
-            res = "${res}A-${(ref + 64).toChar()}"
-        }
-        res = "$res]{1,}\$"
-        return res
-    }
-
     fun getConversion(base :Int) : String{
         return if(base == userInputBasis){
             userInput
@@ -119,7 +101,12 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
     }
 
     fun initUserInput(input: String, progress: Int) {
-        if(validateInput(input, progress)){
+        if(
+            BaseConvertionValidation.validate(
+                input,
+                getBasisBySeekBarProgress(progress)
+            )
+        ){
             userInput = input
             userInputBasis = progress
             conversions.clear()
