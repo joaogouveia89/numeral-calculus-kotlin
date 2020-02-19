@@ -15,7 +15,6 @@ class NumericBasisFromDecimal(private val decimal : String, private val outputBa
                 getNumberChar(num % outputBasis) + result
             num /= outputBasis
         }
-        Log.d("NumericBasisFromDecimal", "result conversion for $decimal to base $outputBasis = $result")
         return result
     }
 
@@ -25,7 +24,6 @@ class NumericBasisFromDecimal(private val decimal : String, private val outputBa
         if (n in 0..9) {
             c = (n + 48).toChar()
         } else {
-            Log.i("NumericBasisFromDecimal", "$n + 65")
             number -= 10
             c = (number + 65).toChar()
         }
