@@ -1,7 +1,6 @@
 package io.github.joaogouveia89.numeralcalculus.ui.base_conversion
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +16,21 @@ class BaseConversionFragment : BaseFragment() {
     private lateinit var baseConversionViewModel: BaseConversionViewModel
     private val onBasisChangeListener = OnBasisSeekBackChangeListener()
     private val inputTextWatcher = InputTextWatcher{
-        baseConversionViewModel.initUserInput(input.text.toString(), base.progress)
-        activity?.runOnUiThread {
-            result.text = baseConversionViewModel.getConversion(baseConversionViewModel.getBasisBySeekBarProgress(base.progress))
+        if(input.text.isNotEmpty()){
+            baseConversionViewModel.initUserInput(input.text.toString(), base.progress)
+            activity?.runOnUiThread {
+                result.text = baseConversionViewModel.getConversion(baseConversionViewModel.getBasisBySeekBarProgress(base.progress))
+            }
+        }else{
+            activity?.runOnUiThread {
+                clearFields()
+                baseConversionViewModel.clearData()
+            }
         }
+    }
+
+    private fun clearFields() {
+        result.text = ""
     }
 
     override fun onCreateView(

@@ -52,6 +52,10 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
             field = getBasisBySeekBarProgress(value)
         }
 
+    fun clearData(){
+        userInput = ""
+        userInputBasis = 0
+    }
     init {
         pool = ThreadPoolExecutor(
             numberOfCores * 2,
