@@ -10,7 +10,6 @@
             android:title="Home" />
         <item
             android:id="@+id/nav_base_conversion"
-            android:icon="@drawable/ic_binary"
             android:title="@string/nav_base_conversion" />
         <item
             android:id="@+id/nav_slideshow"

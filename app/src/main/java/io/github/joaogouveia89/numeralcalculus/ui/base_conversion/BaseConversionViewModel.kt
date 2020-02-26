@@ -1,6 +1,6 @@
 package io.github.joaogouveia89.numeralcalculus.ui.base_conversion
 
-import android.util.SparseArray
+import androidx.collection.SparseArrayCompat
 import androidx.core.util.containsKey
 import androidx.core.util.set
 import androidx.lifecycle.LiveData
@@ -29,7 +29,7 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
     private val pool : ThreadPoolExecutor
 
     private val conversionsQueue = LinkedBlockingDeque<Runnable>()
-    private val conversions = SparseArray<Future<String>>()
+    private val conversions = SparseArrayCompat<Future<String>>()
 
     private lateinit var base10Process : NumericBasisToDecimal
 
@@ -75,7 +75,7 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
         val range = getConversionRange(basis)
         for(base in range){
             if(!conversions.containsKey(base)){
-                conversions[base] = pool.submit(NumericBasisFromDecimal(base10Result, base))
+                conversions.setValueAt(base, pool.submit(NumericBasisFromDecimal(base10Result, base)))
             }
         }
     }
@@ -105,8 +105,9 @@ class BaseConversionViewModel : BaseFragmentViewModel() {
     }
 
     fun initUserInput(input: String, progress: Int) {
+        val baseConvertionValidation = BaseConvertionValidation()
         if(
-            BaseConvertionValidation.validate(
+            baseConvertionValidation.validate(
                 input,
                 getBasisBySeekBarProgress(progress)
             )

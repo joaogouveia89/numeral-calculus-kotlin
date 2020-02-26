@@ -6,6 +6,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
+import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
@@ -21,10 +22,6 @@ class NumericBasisToDecimalTest{
     @Before
     fun beforeTest() {
         PowerMockito.mockStatic(Log::class.java)
-        Mockito.`when`(Log.i(any(), any())).then {
-            println(it.arguments[1] as String)
-            1
-        }
     }
 
     @Test

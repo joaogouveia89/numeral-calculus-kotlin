@@ -1,7 +1,6 @@
 package io.github.joaogouveia89.numeralcalculus.ui.base_conversion
 
 class BaseConvertionValidation {
-    companion object{
         fun validate(input: String, seekBarPosition: Int) : Boolean{
             val regex = generateInputRegex(seekBarPosition).toRegex()
             return regex.matches(input)
@@ -18,6 +17,4 @@ class BaseConvertionValidation {
             res = "$res]{1,}\$"
             return res
         }
-    }
-
 }
