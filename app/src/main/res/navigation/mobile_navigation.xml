@@ -40,4 +40,15 @@
         android:name="io.github.joaogouveia89.numeralcalculus.ui.base_conversion.BaseConversionFragment"
         android:label="@string/nav_base_conversion"
         tools:layout="@layout/fragment_base_conversion" />
+
+    <fragment
+        android:id="@+id/nav_linear_system_direct_method"
+        android:name="io.github.joaogouveia89.numeralcalculus.ui.linear_system.LinearSystemFragment"
+        android:label="@string/nav_linear_system_direct_method"
+        tools:layout="@layout/fragment_linear_system">
+        <argument
+            android:name="method"
+            app:argType="integer"
+            android:defaultValue="0"/>
+    </fragment>
 </navigation>

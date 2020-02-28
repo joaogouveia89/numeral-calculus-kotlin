@@ -20,6 +20,8 @@
     <string name="title_activity_settings" translatable="false">Settings</string>
     <string name="basis_seek_label" translatable="false">Base %1$d</string>
     <string name="error_out_bound">This number is out of app conversion boundaries</string>
+    <string name="nav_linear_system">Linear System</string>
+    <string name="nav_linear_system_direct_method">Direct Method</string>
 
     <!-- Messages Preferences -->
 
