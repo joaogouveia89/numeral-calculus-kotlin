@@ -12,34 +12,16 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="io.github.joaogouveia89.numeralcalculus.ui.gallery.GalleryFragment"
-        android:label="Gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="io.github.joaogouveia89.numeralcalculus.ui.slideshow.SlideshowFragment"
-        android:label="Slide Show"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <fragment
-        android:id="@+id/nav_tools"
-        android:name="io.github.joaogouveia89.numeralcalculus.ui.tools.ToolsFragment"
-        android:label="Tools"
-        tools:layout="@layout/fragment_tools" />
-
-    <fragment
-        android:id="@+id/nav_share"
-        android:name="io.github.joaogouveia89.numeralcalculus.ui.share.ShareFragment"
-        android:label="Share"
-        tools:layout="@layout/fragment_share" />
-
-    <fragment
         android:id="@+id/nav_base_conversion"
         android:name="io.github.joaogouveia89.numeralcalculus.ui.base_conversion.BaseConversionFragment"
         android:label="@string/nav_base_conversion"
         tools:layout="@layout/fragment_base_conversion" />
+
+    <fragment
+        android:id="@+id/nav_fractions_basic_ops"
+        android:name="io.github.joaogouveia89.numeralcalculus.ui.fraction.FractionBasicOperationsFragment"
+        android:label="@string/nav_fractions_basic_ops"
+        tools:layout="@layout/fragment_fraction_basic_operations" />
 
     <fragment
         android:id="@+id/nav_linear_system_direct_method"
