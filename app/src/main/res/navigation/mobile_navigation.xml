@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_base_conversion" />
 
     <fragment
-        android:id="@+id/nav_fractions_basic_ops"
-        android:name="io.github.joaogouveia89.numeralcalculus.ui.fraction.FractionBasicOperationsFragment"
-        android:label="@string/nav_fractions_basic_ops"
-        tools:layout="@layout/fragment_fraction_basic_operations" />
+        android:id="@+id/nav_expressions"
+        android:name="io.github.joaogouveia89.numeralcalculus.ui.expressions.ExpressionsFragment"
+        android:label="@string/nav_expressions"
+        tools:layout="@layout/fragment_expressions" />
 
     <fragment
         android:id="@+id/nav_linear_system_direct_method"

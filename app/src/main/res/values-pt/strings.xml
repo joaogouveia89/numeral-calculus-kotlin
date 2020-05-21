@@ -15,8 +15,7 @@
     <string name="error_out_bound">Esse numero é muito grande para converter nesse aplicativo</string>
     <string name="nav_linear_system">Sistemas Lineares</string>
     <string name="nav_linear_system_direct_method">Método direto</string>
-    <string name="nav_fractions">Frações</string>
-    <string name="nav_fractions_basic_ops">Operações Básicas</string>
+    <string name="nav_expressions">Expressões</string>
     <string name="result">Resultado</string>
     <string name="calculate">Calcular</string>
 </resources>

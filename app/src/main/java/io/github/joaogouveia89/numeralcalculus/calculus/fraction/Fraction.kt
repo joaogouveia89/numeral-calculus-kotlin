@@ -4,6 +4,10 @@ class Fraction(numerator: Int, denominator: Int = 1) {
     val numerator : Int
     val denominator : Int
 
+    companion object{
+        fun isFraction(expression : String) :Boolean = expression.substring(0, 5) == "frac("
+    }
+
     init {
         if(denominator == 0){
             throw FractionException("Denominator cannot be zero")

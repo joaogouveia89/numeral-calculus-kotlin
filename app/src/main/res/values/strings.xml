@@ -22,8 +22,7 @@
     <string name="error_out_bound">This number is out of app conversion boundaries</string>
     <string name="nav_linear_system">Linear System</string>
     <string name="nav_linear_system_direct_method">Direct Method</string>
-    <string name="nav_fractions">Fractions</string>
-    <string name="nav_fractions_basic_ops">Basic Operations</string>
+    <string name="nav_expressions">Expressions</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

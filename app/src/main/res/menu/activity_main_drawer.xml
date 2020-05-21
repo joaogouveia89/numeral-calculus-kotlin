@@ -11,13 +11,10 @@
         <item
             android:id="@+id/nav_base_conversion"
             android:title="@string/nav_base_conversion" />
-        <item
-            android:title="@string/nav_fractions">
-        <menu>
-            <item android:id="@+id/nav_fractions_basic_ops"
-                android:title="@string/nav_fractions_basic_ops"/>
-        </menu>
-        </item>
+
+        <item android:id="@+id/nav_expressions"
+            android:title="@string/nav_expressions"/>
+
         <item
             android:title="@string/nav_linear_system">
             <menu>
